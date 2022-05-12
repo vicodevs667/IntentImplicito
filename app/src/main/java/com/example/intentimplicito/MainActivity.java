@@ -43,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 olderVersions(phoneNumber);
             }
+        } else {
+            Toast.makeText(this, "Inserte un numero", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -79,8 +81,12 @@ public class MainActivity extends AppCompatActivity {
                     //Comprobar si ha sido aceptado o denegado la peticion de permiso
                     if (result == PackageManager.PERMISSION_GRANTED) {
                         // Concedio su permiso
+                        phoneNumber = etTelefono.getText().toString();
+                        Intent intentCall = new Intent(Intent.ACTION_CALL, Uri.parse("tel:"+ phoneNumber));
+                        startActivity(intentCall);
                     } else {
                         //no concedio su permiso
+                        Toast.makeText(this, "Declinaste el acceso", Toast.LENGTH_LONG).show();
                     }
                 }
                 break;
